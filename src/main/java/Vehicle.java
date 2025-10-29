@@ -62,8 +62,23 @@ public class Vehicle extends Asset {
             valueAfterVehicleAgeDepreciation = original - reduction;
         }
 
-        String lower
+        String modelName= "";
+        if (makeModel != null) {
+            modelName = makeModel.toLowerCase();
+        }
 
+        boolean isHondaOrToyota = modelName == "hondo" || modelName == "toyota";
+
+        double finalValue = valueAfterVehicleAgeDepreciation;
+        if  ( odometer > 10000 && !isHondaOrToyota ) {
+            finalValue = finalValue * 0.75;
+        }
+
+        if (finalValue < 0 ) {
+            finalValue = 0.0;
+        }
+
+        return finalValue;
 
     }
 }
